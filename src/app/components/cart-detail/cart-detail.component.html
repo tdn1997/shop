@@ -1,0 +1,102 @@
+<div id="header-content" class="container-fluid">
+  <div class="row mt-3 justify-content-center">
+    <h2 class="">CART</h2>
+  </div>
+</div>
+<hr />
+
+<div class="container-fluid">
+  <div *ngIf="isEmpty && !isOrder" class="text-center">
+    <h2 class="bg-danger text-white">Your cart is empty</h2>
+    <p>Click <a routerLink="/products">here</a> to go back</p>
+  </div>
+  <div *ngIf="isOrder" class="text-center">
+    <h2 class="bg-success text-white">Order successfully!!</h2>
+    <p>Click <a routerLink="/products">here</a> to go back</p>
+  </div>
+  <div class="row ">
+    <div class="col-12 col-md-8">
+      <div class="container-fluid">
+        <div class="row">
+          <div
+            class="col-12 col-sm-6 col-md-4 col-lg-3"
+            *ngFor="let product of productsInCart"
+          >
+            <div class="card ">
+              <img
+                class="card-img-top"
+                src="{{ product.img }}"
+                title="{{ product.name }}"
+                alt="{{ product.name }}"
+              />
+              <div class="card-body">
+                <h4 class="card-title">{{ product.name }}</h4>
+                <p class="card-text">{{ product.price }}</p>
+                <button
+                  (click)="removeItem(product)"
+                  class="btn-sm btn-outline-danger"
+                >
+                  Remove from Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form
+      id="check-out-form"
+      *ngIf="!isEmpty"
+      class="col-12 col-md-4 p-2"
+      [formGroup]="userFormGroup"
+      novalidate
+    >
+      <div class="form-group text-white mt-2">
+        <label for="customer-name">Customer Name</label>
+        <input
+          formControlName="userName"
+          type="text"
+          name=""
+          #userName
+          class="form-control"
+          placeholder=""
+        />
+        <label for="customer-email">Email</label>
+        <input
+          [email]="true"
+          formControlName="userEmail"
+          type="text"
+          name=""
+          #userEmail
+          class="form-control"
+          placeholder=""
+        />
+        <label for="customer-phone-number">Phone Number</label>
+        <input
+          formControlName="userPhone"
+          type="text"
+          name=""
+          #userPhone
+          class="form-control"
+          placeholder=""
+        />
+        <label for="customer-address">Address</label>
+        <input
+          formControlName="userAddress"
+          type="text"
+          name=""
+          #userAddress
+          class="form-control"
+          placeholder=""
+        />
+        <hr />
+        <div class="text-white"><b><i>Total:</i> {{cartTotal}}đ</b></div>
+        <div class="d-flex justify-content-end">
+          <button (click)="createOrder(userName.value, userEmail.value, userPhone.value, userAddress.value);" [disabled]="userFormGroup.status == 'INVALID'" class="btn btn-danger">
+            Check Out
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<nav
+  class="fixed-top navbar navbar-expand-md navbar-dark bg-dark justify-content-between"
+>
+  <a href="/admin"
+    ><img
+      style="width: 3.5rem;"
+      class=" img-thumbnail"
+      src="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png"
+      alt="Admin"
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link btn  ml-1" href="/admin"
+          >ADMIN<span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link btn btn-primary ml-1" (click)="showProducts()"
+          >PRODUCTS<span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link btn btn-primary ml-1" (click)="showOrders()"
+          >ORDERS<span class="sr-only">(current)</span></a
+        >
+      </li>
+    </ul>
+    <form class="form-inline">
+      <input
+        #searchInput
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button
+        (click)="onSearch(searchInput.value)"
+        class="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+</nav>
+<div id="header-content" class="container-fluid">
+  <div class="row mt-3 justify-content-center">
+    <h2 class="">ADMIN</h2>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4 col-lg-3 bg-primary">
+      <h3>SideBar</h3>
+    </div>
+    <div class="col-12 col-md-8 col-lg-9">
+      <h3>Products</h3>
+      <hr />
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 form-group">
+            <h4>{{ productDetail.name }}</h4>
+            <div class="form-group">
+              <label>Code: </label>
+              <input
+                #code
+                class="form-control"
+                type="text"
+                value="{{ productDetail.code }}"
+              />
+              <label>Name: </label>
+              <input
+                #name
+                class="form-control"
+                type="text"
+                value="{{ productDetail.name }}"
+              />
+              <label>Img: </label>
+              <input
+                #img
+                class="form-control"
+                type="text"
+                value="{{ productDetail.img }}"
+              />
+              <label>Release: </label>
+              <input
+                #release
+                class="form-control"
+                type="text"
+                value="{{ productDetail.release }}"
+              />
+              <label>Inventory: </label>
+              <input
+                #inventory
+                class="form-control"
+                type="text"
+                value="{{ productDetail.inventory }}"
+              />
+              <label>Price: </label>
+              <input
+                #price
+                class="form-control"
+                type="text"
+                value="{{ productDetail.price }}"
+              />
+              <label>Sold: </label>
+              <input
+                #sold
+                class="form-control"
+                type="text"
+                value="{{ productDetail.sold }}"
+              />
+              <label>Company: </label>
+              <input
+                #company
+                class="form-control"
+                type="text"
+                value="{{ productDetail.company }}"
+              />
+            </div>
+            <br />
+            <button
+              (click)="
+                updateProduct(
+                  productDetail._id,
+                  code.value,
+                  name.value,
+                  img.value,
+                  release.value,
+                  inventory.value,
+                  price.value,
+                  sold.value,
+                  company.value)
+              "
+              class="btn btn-dark"
+            >
+            <a href="/admin">Update</a>              
+            </button>
+            <button (click)="deleteProduct(productDetail._id)"  class="btn btn-danger ml-1"><a href="/admin">Delete</a></button>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />

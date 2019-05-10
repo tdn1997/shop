@@ -1,0 +1,118 @@
+<nav
+  class="fixed-top navbar navbar-expand-md navbar-dark bg-dark justify-content-between"
+>
+  <a href="/admin"
+    ><img
+      style="width: 3.5rem;"
+      class=" img-thumbnail"
+      src="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png"
+      alt="Admin"
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link btn  ml-1" href="/admin"
+          >ADMIN<span class="sr-only">(current)</span></a
+        >
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+<div id="header-content" class="container-fluid">
+  <div class="row mt-3 justify-content-center">
+    <h2 class="">ADMIN</h2>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4 col-lg-3 border">
+      <h3>Dash Board</h3>
+      <hr>
+      <a class="btn btn-primary ml-1 text-white" (click)="showProducts()"
+        >PRODUCTS<span class="sr-only">(current)</span></a
+      >
+      <a class="btn btn-primary ml-1 text-white" (click)="showOrders()"
+        >ORDERS<span class="sr-only">(current)</span></a
+      >
+    </div>
+    <div *ngIf="ArrayType == 'Products'" class="col-12 col-md-8 col-lg-9">
+      <h3>Products</h3>
+      <hr />
+      <div class="container-fluid">
+        <div class="row">
+          <div
+            *ngFor="let item of showArray"
+            class="col-12 col-md-4 form-group"
+          >
+            <div routerLink="/admin/products/{{ item._id }}">
+              <h4>{{ item.name }}</h4>
+              <img
+                src="{{ item.img }}"
+                class="img-fluid"
+                style="width: 150px"
+              />
+              <div class="form-group">
+                <div>Code: {{ item.code }}</div>
+                <div>Release: {{ item.release }}</div>
+                <div>Inventory: {{ item.inventory }}</div>
+                <div>Price: {{ item.price }}</div>
+                <div>Sold: {{ item.sold }}</div>
+                <div>Company: {{ item.company }}</div>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ArrayType == 'Orders'" class="col-12 col-md-8 col-lg-9">
+      <h3>Orders</h3>
+      <hr />
+      <div class="container-fluid">
+        <div class="row">
+          <div
+            
+            *ngFor="let item of showArray"
+            class="col-12"
+          >
+            <div routerLink="/admin/orders/{{ item._id }}">
+                <div>Create Day: {{ item.createDay }}</div>
+                <div>User Name: {{ item.userName }}</div>
+                <div>User Email: {{ item.userEmail }}</div>
+                <div>User Phone: {{ item.userPhone }}</div>
+                <div>User Address: {{ item.userAddress }}</div>
+                <div>
+                  Total: <b>{{ item.total }}</b>
+                </div>
+                <div>Completed: {{ item.completed }}</div>
+                <div>Delivery Day: {{ item.deliveryDay }}</div>
+                <div>
+                  <u>Products:</u>
+                  <div *ngFor="let product of item.products">
+                    <h6>- {{ product.name }}</h6>
+                    <div>Price: {{ product.price }}</div>
+                  </div>
+                </div>
+              </div>
+                <br>
+                <button (click)="completeOrder(item._id)" *ngIf="!item.completed" class="btn btn-dark"><a href="/admin">Complete</a></button>
+                <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />

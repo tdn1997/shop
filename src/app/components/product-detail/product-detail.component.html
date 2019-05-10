@@ -1,0 +1,34 @@
+<div id="header-content" class="container-fluid">
+  <div class="row mt-3 justify-content-center">
+    <h2 class="">PRODUCT DETAIL</h2>
+  </div>
+</div>
+<hr />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-5">
+      <img class="card-img-top" src="{{ productDetail.img }}" alt="" />
+    </div>
+    <div class="col-12 col-md-7">
+      <h3>
+        <b> {{ productDetail.name }}</b>
+      </h3>
+      <div *ngIf="productDetail.inventory == 0" class="btn btn-danger w-100">
+        Out of stock
+        </div>
+      <hr />
+      <p><u>Product Price:</u> {{ productDetail.price }}</p>
+      <p><u>Company:</u> {{ productDetail.company }}</p>
+      <p><u>Inventory:</u> {{ productDetail.inventory }}</p>
+      <p><u>Sold:</u> {{ productDetail.sold }}</p>
+      <hr>
+      <button
+        *ngIf="productDetail.inventory !== 0"
+        (click)="addToCart(productDetail)"
+        class="btn-sm btn-primary"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
